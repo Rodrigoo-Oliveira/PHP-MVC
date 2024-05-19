@@ -22,38 +22,33 @@ $videoList = $pdo->query('SELECT * FROM videos;')->fetchAll(\PDO::FETCH_ASSOC);
 
 <body>
 
-    <header>
-
-        <nav class="cabecalho">
-            <a class="logo" href="./index.html"></a>
-
-            <div class="cabecalho__icones">
-                <a href="./pages/enviar-video.html" class="cabecalho__videos"></a>
-                <a href="./pages/login.html" class="cabecalho__sair">Sair</a>
-            </div>
-        </nav>
-
-    </header>
+<header>
+    <nav class="cabecalho">
+        <a class="logo" href="./index.html"></a>
+        <div class="cabecalho__icones">
+            <a href="./pages/enviar-video.html" class="cabecalho__videos"></a>
+            <a href="./pages/login.html" class="cabecalho__sair">Sair</a>
+        </div>
+    </nav>
+</header>
 
 <ul class="videos__container">
-    <?php foreach ($videoList as $video): ?>
-    <?php if (isset($video['url']) && !empty($video['url']) && str_starts_with($video['url'], 'http')): ?>
-    <li class="videos__item">
-        <iframe width="100%" height="72%" src="<?php echo $video['url']; ?>"
-            title="YouTube video player" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen></iframe>
-        <div class="descricao-video">
-            <h3><?php echo $video['title']; ?></h3>
-            <div class="acoes-video">
-                <a href="./pages/enviar-video.html">Editar</a>
-                <a href="./pages/enviar-video.html">Excluir</a>
+        <?php foreach ($videoList as $video): ?>
+        <li class="videos__item">
+            <iframe width="100%" height="72%" src="<?= $video['url']; ?>"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+            <div class="descricao-video">
+                <h3><?= $video['title']; ?></h3>
+                <div class="acoes-video">
+                    <a href="./pages/enviar-video.html">Editar</a>
+                    <a href="./remover-video.php?id=<?= $video['id'];?>">Excluir</a>
+                </div>
             </div>
-        </div>
-    </li>
-    <?php endif; ?>
-    <?php endforeach; ?>
-</ul>
+        </li>
+        <?php endforeach; ?>
+    </ul>
 </body>
 
 </html>
