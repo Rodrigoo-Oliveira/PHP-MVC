@@ -1,11 +1,10 @@
 <?php
 
-$pdo = new PDO(dsn:'mysql:host=localhost;dbname=aluraplay', username:'root', password: 'R@d248613');
+$pdo = new PDO(dsn:'mysql:host=localhost;dbname=aluraplay', username:'root', password: '123456');
+
 $videoList = $pdo->query('SELECT * FROM videos;')->fetchAll(\PDO::FETCH_ASSOC);
 
-?>
-
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
@@ -22,17 +21,20 @@ $videoList = $pdo->query('SELECT * FROM videos;')->fetchAll(\PDO::FETCH_ASSOC);
 
 <body>
 
-<header>
-    <nav class="cabecalho">
-        <a class="logo" href="./index.html"></a>
-        <div class="cabecalho__icones">
-            <a href="./pages/enviar-video.html" class="cabecalho__videos"></a>
-            <a href="./pages/login.html" class="cabecalho__sair">Sair</a>
-        </div>
-    </nav>
-</header>
+    <header>
 
-<ul class="videos__container">
+        <nav class="cabecalho">
+            <a class="logo" href="/"></a>
+
+            <div class="cabecalho__icones">
+                <a href="./pages/enviar-video.html" class="cabecalho__videos"></a>
+                <a href="./pages/login.html" class="cabecalho__sair">Sair</a>
+            </div>
+        </nav>
+
+    </header>
+
+    <ul class="videos__container">
         <?php foreach ($videoList as $video): ?>
         <li class="videos__item">
             <iframe width="100%" height="72%" src="<?= $video['url']; ?>"
@@ -42,8 +44,8 @@ $videoList = $pdo->query('SELECT * FROM videos;')->fetchAll(\PDO::FETCH_ASSOC);
             <div class="descricao-video">
                 <h3><?= $video['title']; ?></h3>
                 <div class="acoes-video">
-                    <a href="./pages/enviar-video.html">Editar</a>
-                    <a href="./remover-video.php?id=<?= $video['id'];?>">Excluir</a>
+                    <a href="/formulario.php?id=<?= $video['id']; ?>">Editar</a>
+                    <a href="/remover-video.php?id=<?= $video['id']; ?>">Excluir</a>
                 </div>
             </div>
         </li>

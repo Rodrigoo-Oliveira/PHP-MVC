@@ -2,6 +2,12 @@
 
 $pdo = new PDO(dsn:'mysql:host=localhost;dbname=aluraplay', username:'root', password: '123456');
 
+$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+if ($id === false) {
+    header('Location: /index.php?sucesso=0');
+    exit();
+}
+
 $url = filter_input(INPUT_POST, 'url', FILTER_VALIDATE_URL);
 if ($url === false) {
     header('Location: /index.php?sucesso=0');
@@ -13,14 +19,14 @@ if ($titulo === false) {
     exit();
 }
 
-$sql = 'INSERT INTO videos (url, title) VALUES (?, ?)';
+$sql = 'UPDATE videos SET url = :url, title = :title WHERE id = :id;';
 $statement = $pdo->prepare($sql);
-$statement->bindValue(1, $url);
-$statement->bindValue(2, $titulo);
+$statement->bindValue(':url', $url);
+$statement->bindValue(':title', $titulo);
+$statement->bindValue(':id', $id, PDO::PARAM_INT);
 
 if ($statement->execute() === false) {
     header('Location: /index.php?sucesso=0');
 } else {
     header('Location: /index.php?sucesso=1');
 }
-
