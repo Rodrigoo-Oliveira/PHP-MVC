@@ -3,7 +3,7 @@
 $pdo = new PDO(dsn:'mysql:host=localhost;dbname=aluraplay', username:'root', password: '123456');
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-if ($id === false) {
+if ($id === false && $id !== null) {
     header('Location: /?sucesso=0');
     exit();
 }
