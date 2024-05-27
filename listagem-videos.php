@@ -1,3 +1,7 @@
+<?php
+$pdo = new PDO(dsn:'mysql:host=localhost;dbname=aluraplay', username:'root', password: '123456');
+?>
+
 <?php require_once 'inicio-html.php'; ?>
 
     <ul class="videos__container">
